@@ -9,6 +9,12 @@ namespace BusinessRulesEngine.Services
     public class OrderProcessingService : IOrderProcessingService
     {
         Queue<OrderProxy> _orders = new Queue<OrderProxy>();
+        IMembershipService _membershipService;
+
+        public OrderProcessingService(IMembershipService membershipService)
+        {
+            _membershipService = membershipService;
+        }
 
         public void AddForProcessing(List<OrderProxy> orders)
         {
@@ -31,7 +37,8 @@ namespace BusinessRulesEngine.Services
             var rules = new List<RuleBase>()
             {
                 new PhysicalProduct_PackingSlipRule(),
-                new Book_RoyaltyDepartmentPackingSlip()
+                new Book_RoyaltyDepartmentPackingSlip(),
+                new Membership_ActivationRule(_membershipService)
             };
 
             IOrderProcessingRulesEngine engine = new OrderProcessingRulesEngine(rules);

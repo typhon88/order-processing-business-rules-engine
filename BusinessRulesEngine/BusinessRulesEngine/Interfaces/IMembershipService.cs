@@ -7,6 +7,8 @@ namespace BusinessRulesEngine.Interfaces
     {
         IReadOnlyCollection<Membership> ProcessedMemberships { get; }
 
-        void StartProcessing();
+        int StartProcessing();
+
+        void AddForProcessing(Membership membership);
     }
 }

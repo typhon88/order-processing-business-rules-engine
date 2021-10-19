@@ -18,7 +18,8 @@ namespace BusinessRulesEngine.Tests
         [SetUp]
         public void Setup()
         {
-            _processingService = new OrderProcessingService();
+            _membershipService = new MembershipService();
+            _processingService = new OrderProcessingService(_membershipService);
         }
 
         [Test]
