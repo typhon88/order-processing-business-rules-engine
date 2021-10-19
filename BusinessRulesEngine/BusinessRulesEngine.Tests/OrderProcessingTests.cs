@@ -1,5 +1,7 @@
 using BusinessRulesEngine.Interfaces;
 using BusinessRulesEngine.Models;
+using BusinessRulesEngine.Proxies;
+using BusinessRulesEngine.Services;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,7 @@ namespace BusinessRulesEngine.Tests
         [SetUp]
         public void Setup()
         {
+            _processingService = new OrderProcessingService();
         }
 
         [Test]
@@ -20,9 +23,9 @@ namespace BusinessRulesEngine.Tests
         {
             Product physicalProduct = new();
 
-            List<Order> orders = new()
+            List<OrderProxy> orders = new()
             {
-                new Order(new List<Product> { physicalProduct })
+                new OrderProxy(new List<Product> { physicalProduct })
             };
 
             _processingService.AddForProcessing(orders);

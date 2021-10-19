@@ -2,15 +2,16 @@
 
 namespace BusinessRulesEngine.Models
 {
-    public class Order
+    internal class Order
     {
-        private List<Product> products;
+        internal List<Product> Products;
 
-        public Order(List<Product> products)
+        internal List<PackingSlip> PackingSlips;
+
+        internal Order(List<Product> products)
         {
-            this.products = products;
+            Products = products;
+            PackingSlips = new List<PackingSlip>();
         }
-
-        public ICollection<PackingSlip> PackingSlips { get; set; }
     }
 }
