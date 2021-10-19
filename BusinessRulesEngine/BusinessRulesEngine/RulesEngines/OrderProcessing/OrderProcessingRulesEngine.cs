@@ -1,21 +1,31 @@
 ﻿using BusinessRulesEngine.Interfaces;
-using BusinessRulesEngine.Services;
+using BusinessRulesEngine.Models;
+using BusinessRulesEngine.Proxies;
 using System.Collections.Generic;
 
 namespace BusinessRulesEngine.RulesEngines.OrderProcessing
 {
     internal class OrderProcessingRulesEngine : IOrderProcessingRulesEngine
     {
-        private List<RuleBase> rules;
+        IEnumerable<RuleBase> _rules;
 
-        public OrderProcessingRulesEngine(List<RuleBase> rules)
+        public OrderProcessingRulesEngine(IEnumerable<RuleBase> rules)
         {
-            this.rules = rules;
+            _rules = rules;
         }
 
-        public void ApplyRules(object order)
+        public void ApplyRules(OrderProxy order)
         {
-            throw new System.NotImplementedException();
+            foreach (var product in order.Products)
+            {
+                foreach (var rule in _rules)
+                {
+                    if (rule.IsMatch(product))
+                    {
+                        rule.UpdateOrder(order);
+                    }
+                }
+            }
         }
     }
 }

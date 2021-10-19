@@ -1,7 +1,9 @@
-﻿namespace BusinessRulesEngine.Interfaces
+﻿using BusinessRulesEngine.Proxies;
+
+namespace BusinessRulesEngine.Interfaces
 {
     internal interface IOrderProcessingRulesEngine
     {
-        void ApplyRules(object order);
+        void ApplyRules(OrderProxy order);
     }
 }
