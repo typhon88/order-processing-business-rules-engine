@@ -5,6 +5,7 @@ using BusinessRulesEngine.Services;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using static BusinessRulesEngine.Models.Product;
 
 namespace BusinessRulesEngine.Tests
 {
@@ -21,7 +22,11 @@ namespace BusinessRulesEngine.Tests
         [Test]
         public void PhysicalProduct_GeneratesShippingPackingSlip()
         {
-            Product physicalProduct = new();
+            Product physicalProduct = new()
+            {
+                Category = ProductCategory.Physical,
+                Name = "Some physical product"
+            };
 
             List<OrderProxy> orders = new()
             {
