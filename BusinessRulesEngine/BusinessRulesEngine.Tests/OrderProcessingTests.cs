@@ -32,6 +32,7 @@ namespace BusinessRulesEngine.Tests
             _processingService.ProcessOrders();
 
             Assert.AreEqual(1, orders.Single().PackingSlips.Count);
+            Assert.AreEqual(orders.Single().PackingSlips.Single().Name, "Shipping packing slip");
         }
     }
 }
