@@ -1,19 +1,37 @@
 ﻿using BusinessRulesEngine.Interfaces;
 using BusinessRulesEngine.Proxies;
+using BusinessRulesEngine.RulesEngines.OrderProcessing;
 using System.Collections.Generic;
 
 namespace BusinessRulesEngine.Services
 {
     public class OrderProcessingService : IOrderProcessingService
     {
+        Queue<OrderProxy> _orders = new Queue<OrderProxy>();
+
         public void AddForProcessing(List<OrderProxy> orders)
         {
-            throw new System.NotImplementedException();
+            foreach (OrderProxy order in orders)
+            {
+                _orders.Enqueue(order);
+            }
         }
 
         public void ProcessOrders()
         {
-            throw new System.NotImplementedException();
+            for (var i = 0; i < _orders.Count; i++)
+            {
+                ProcessSingleOrder(_orders.Dequeue());
+            }
+        }
+
+        private void ProcessSingleOrder(OrderProxy order)
+        {
+            var rules = new List<RuleBase>();
+
+            IOrderProcessingRuleEngine engine = new OrderProcessingRuleEngine(rules);
+
+            engine.ApplyRules(order);
         }
     }
 }
