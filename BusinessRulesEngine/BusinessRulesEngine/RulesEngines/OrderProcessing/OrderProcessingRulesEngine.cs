@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace BusinessRulesEngine.RulesEngines.OrderProcessing
 {
-    internal class OrderProcessingRuleEngine : IOrderProcessingRuleEngine
+    internal class OrderProcessingRulesEngine : IOrderProcessingRulesEngine
     {
         private List<RuleBase> rules;
 
-        public OrderProcessingRuleEngine(List<RuleBase> rules)
+        public OrderProcessingRulesEngine(List<RuleBase> rules)
         {
             this.rules = rules;
         }

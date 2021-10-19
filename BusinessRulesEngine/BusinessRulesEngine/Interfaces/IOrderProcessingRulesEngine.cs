@@ -1,6 +1,6 @@
 ﻿namespace BusinessRulesEngine.Interfaces
 {
-    internal interface IOrderProcessingRuleEngine
+    internal interface IOrderProcessingRulesEngine
     {
         void ApplyRules(object order);
     }

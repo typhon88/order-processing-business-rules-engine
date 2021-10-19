@@ -29,7 +29,7 @@ namespace BusinessRulesEngine.Services
         {
             var rules = new List<RuleBase>();
 
-            IOrderProcessingRuleEngine engine = new OrderProcessingRuleEngine(rules);
+            IOrderProcessingRulesEngine engine = new OrderProcessingRulesEngine(rules);
 
             engine.ApplyRules(order);
         }
