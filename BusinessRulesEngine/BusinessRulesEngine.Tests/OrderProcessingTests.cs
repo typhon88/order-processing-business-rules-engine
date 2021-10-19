@@ -42,7 +42,7 @@ namespace BusinessRulesEngine.Tests
         }
 
         [Test]
-        public void Book_GeneratesShippingAndRoyaltyPackingSlip()
+        public void Book_GeneratesShippingAndRoyaltyPackingSlips()
         {
             Product book = new()
             {

@@ -1,6 +1,7 @@
 ﻿using BusinessRulesEngine.Interfaces;
 using BusinessRulesEngine.Proxies;
 using BusinessRulesEngine.RulesEngines.OrderProcessing;
+using BusinessRulesEngine.RulesEngines.OrderProcessing.Rules;
 using System.Collections.Generic;
 
 namespace BusinessRulesEngine.Services
@@ -29,7 +30,8 @@ namespace BusinessRulesEngine.Services
         {
             var rules = new List<RuleBase>()
             {
-                new PhysicalProduct_PackingSlipRule()
+                new PhysicalProduct_PackingSlipRule(),
+                new Book_RoyaltyDepartmentPackingSlip()
             };
 
             IOrderProcessingRulesEngine engine = new OrderProcessingRulesEngine(rules);
