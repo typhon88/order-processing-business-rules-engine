@@ -5,6 +5,7 @@ using BusinessRulesEngine.Services;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using static BusinessRulesEngine.Models.Membership;
 using static BusinessRulesEngine.Models.Product;
 
 namespace BusinessRulesEngine.Tests
@@ -12,6 +13,7 @@ namespace BusinessRulesEngine.Tests
     public class Tests
     {
         IOrderProcessingService _processingService;
+        IMembershipService _membershipService;
 
         [SetUp]
         public void Setup()
@@ -60,6 +62,30 @@ namespace BusinessRulesEngine.Tests
             _processingService.ProcessOrders();
 
             Assert.AreEqual(2, orders.First().PackingSlips.Count);
+        }
+
+        [Test]
+        public void Membership_ActivatesMembership()
+        {
+            Product membership = new()
+            {
+                Category = ProductCategory.Digital,
+                Name = "Some membership name",
+                Type = ProductType.Membership
+            };
+
+            List<OrderProxy> orders = new()
+            {
+                new OrderProxy(new List<Product> { membership })
+            };
+
+            _processingService.AddForProcessing(orders);
+            _processingService.ProcessOrders();
+
+            _membershipService.StartProcessing();
+
+            Assert.AreEqual(1, _membershipService.ProcessedMemberships.Count);
+            Assert.AreEqual(MembershipType.New, _membershipService.ProcessedMemberships.Single().Type);
         }
     }
 }
