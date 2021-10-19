@@ -20,6 +20,7 @@ namespace BusinessRulesEngine.Tests
         public void Setup()
         {
             _membershipService = new MembershipService();
+            _emailService = new EmailService();
             _processingService = new OrderProcessingService(_membershipService, _emailService);
         }
 
@@ -134,17 +135,15 @@ namespace BusinessRulesEngine.Tests
                 new OrderProxy(new List<Product> { membership })
             };
 
-            _membershipService.ClearQueues();
+            _emailService.ClearQueues();
             _processingService.AddForProcessing(orders);
             _processingService.ProcessOrders();
 
-            var numberOfProcessedMemberships = _membershipService.StartProcessing();
+            _emailService.StartProcessing();
 
-            emailService.StartProcessing();
-
-            Assert.AreEqual(1, membershipService.ProcessedMemberships.Count);
-            Assert.AreEqual(MembershipType.Upgrade, membershipService.ProcessedMemberships.Single().Type);
-            Assert.AreEqual(1, emailService.ProcessedOrderEmails.Count);
+            Assert.AreEqual(1, _membershipService.ProcessedMemberships.Count);
+            Assert.AreEqual(MembershipType.Upgrade, _membershipService.ProcessedMemberships.Single().Type);
+            Assert.AreEqual(1, _emailService.ProcessedOrderEmails.Count);
         }
     }
 }
