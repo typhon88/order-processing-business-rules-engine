@@ -10,5 +10,7 @@ namespace BusinessRulesEngine.Interfaces
         int StartProcessing();
 
         void AddForProcessing(Membership membership);
+
+        void ClearQueues();
     }
 }

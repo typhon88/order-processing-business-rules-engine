@@ -80,6 +80,7 @@ namespace BusinessRulesEngine.Tests
                 new OrderProxy(new List<Product> { membership })
             };
 
+            _membershipService.ClearQueues();
             _processingService.AddForProcessing(orders);
             _processingService.ProcessOrders();
 
@@ -105,6 +106,7 @@ namespace BusinessRulesEngine.Tests
                 new OrderProxy(new List<Product> { membership })
             };
 
+            _membershipService.ClearQueues();
             _processingService.AddForProcessing(orders);
             _processingService.ProcessOrders();
 
@@ -112,7 +114,7 @@ namespace BusinessRulesEngine.Tests
 
             Assert.AreEqual(1, numberOfProcessedMemberships);
             Assert.AreEqual(1, _membershipService.ProcessedMemberships.Count);
-            Assert.AreEqual(MembershipType.New, _membershipService.ProcessedMemberships.Single().Type);
+            Assert.AreEqual(MembershipType.Upgrade, _membershipService.ProcessedMemberships.Single().Type);
         }
     }
 }

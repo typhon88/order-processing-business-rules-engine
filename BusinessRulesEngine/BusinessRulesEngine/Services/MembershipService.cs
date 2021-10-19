@@ -41,5 +41,12 @@ namespace BusinessRulesEngine.Services
 
             return _numberOfProcessedMemberships;
         }
+
+        public void ClearQueues()
+        {
+            _memberships.Clear();
+            _processedMemberships.Clear();
+            _numberOfProcessedMemberships = 0;
+        }
     }
 }

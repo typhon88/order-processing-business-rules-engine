@@ -38,7 +38,8 @@ namespace BusinessRulesEngine.Services
             {
                 new PhysicalProduct_PackingSlipRule(),
                 new Book_RoyaltyDepartmentPackingSlip(),
-                new Membership_ActivationRule(_membershipService)
+                new Membership_ActivationRule(_membershipService),
+                new Membership_UpgradeRule(_membershipService)
             };
 
             IOrderProcessingRulesEngine engine = new OrderProcessingRulesEngine(rules);

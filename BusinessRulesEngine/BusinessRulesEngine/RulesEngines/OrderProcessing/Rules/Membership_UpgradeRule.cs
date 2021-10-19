@@ -4,11 +4,11 @@ using BusinessRulesEngine.Proxies;
 
 namespace BusinessRulesEngine.RulesEngines.OrderProcessing.Rules
 {
-    internal class Membership_ActivationRule : RuleBase
+    internal class Membership_UpgradeRule : RuleBase
     {
         IMembershipService _membershipService;
 
-        internal Membership_ActivationRule(IMembershipService membershipService)
+        internal Membership_UpgradeRule(IMembershipService membershipService)
         {
             _membershipService = membershipService;
         }
@@ -16,12 +16,12 @@ namespace BusinessRulesEngine.RulesEngines.OrderProcessing.Rules
         internal override bool IsMatch(Product product)
         {
             return product.Category.Equals(Product.ProductCategory.Digital) &&
-                product.Type.Equals(Product.ProductType.Membership);
+                product.Type.Equals(Product.ProductType.MembershipUpgrade);
         }
 
         internal override void UpdateOrder(OrderProxy order)
         {
-            var membership = new Membership(Membership.MembershipType.New);
+            var membership = new Membership(Membership.MembershipType.Upgrade);
 
             _membershipService.AddForProcessing(membership);
         }
