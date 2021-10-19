@@ -7,12 +7,14 @@ namespace BusinessRulesEngine.RulesEngines.OrderProcessing
     {
         internal override bool IsMatch(Product product)
         {
-            throw new System.NotImplementedException();
+            return product.Category.Equals(Product.ProductCategory.Physical);
         }
 
         internal override void UpdateOrder(OrderProxy order)
         {
-            throw new System.NotImplementedException();
+            var packingSlip = order.GetShippingPackingSlip();
+
+            order.AddPackingSlip(packingSlip);
         }
     }
 }

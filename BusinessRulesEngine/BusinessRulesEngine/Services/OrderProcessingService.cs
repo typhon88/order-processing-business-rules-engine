@@ -27,7 +27,10 @@ namespace BusinessRulesEngine.Services
 
         private void ProcessSingleOrder(OrderProxy order)
         {
-            var rules = new List<RuleBase>();
+            var rules = new List<RuleBase>()
+            {
+                new PhysicalProduct_PackingSlipRule()
+            };
 
             IOrderProcessingRulesEngine engine = new OrderProcessingRulesEngine(rules);
 

@@ -15,5 +15,19 @@ namespace BusinessRulesEngine.Proxies
         public IReadOnlyCollection<Product> Products => _order.Products;
 
         public IReadOnlyCollection<PackingSlip> PackingSlips => _order.PackingSlips;
+
+        internal PackingSlip GetShippingPackingSlip()
+        {
+            return new PackingSlip()
+            {
+                Name = "Shipping packing slip",
+                Products = _order.Products
+            };
+        }
+
+        internal void AddPackingSlip(PackingSlip packingSlip)
+        {
+            _order.PackingSlips.Add(packingSlip);
+        }
     }
 }
