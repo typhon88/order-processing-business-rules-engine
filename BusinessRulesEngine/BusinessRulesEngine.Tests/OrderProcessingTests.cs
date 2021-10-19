@@ -119,7 +119,6 @@ namespace BusinessRulesEngine.Tests
             Assert.AreEqual(MembershipType.Upgrade, _membershipService.ProcessedMemberships.Single().Type);
         }
 
-
         [Test]
         public void Membership_EmailCustomer()
         {
