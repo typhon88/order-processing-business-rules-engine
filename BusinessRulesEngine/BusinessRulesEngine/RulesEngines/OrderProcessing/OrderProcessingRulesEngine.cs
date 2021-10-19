@@ -1,5 +1,4 @@
 ﻿using BusinessRulesEngine.Interfaces;
-using BusinessRulesEngine.Models;
 using BusinessRulesEngine.Proxies;
 using System.Collections.Generic;
 
