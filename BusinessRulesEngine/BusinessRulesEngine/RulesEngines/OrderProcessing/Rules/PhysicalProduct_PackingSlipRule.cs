@@ -1,5 +1,6 @@
 ﻿using BusinessRulesEngine.Models;
 using BusinessRulesEngine.Proxies;
+using System.Linq;
 
 namespace BusinessRulesEngine.RulesEngines.OrderProcessing
 {
@@ -12,7 +13,11 @@ namespace BusinessRulesEngine.RulesEngines.OrderProcessing
 
         internal override void UpdateOrder(OrderProxy order)
         {
-            var packingSlip = order.GetShippingPackingSlip();
+            var packingSlip = new PackingSlip()
+            {
+                Name = "Shipping packing slip",
+                Products = order.Products.ToList()
+            }; ;
 
             order.AddPackingSlip(packingSlip);
         }
