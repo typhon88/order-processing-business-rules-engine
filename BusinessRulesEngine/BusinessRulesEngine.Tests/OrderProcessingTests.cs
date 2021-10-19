@@ -89,5 +89,30 @@ namespace BusinessRulesEngine.Tests
             Assert.AreEqual(1, _membershipService.ProcessedMemberships.Count);
             Assert.AreEqual(MembershipType.New, _membershipService.ProcessedMemberships.Single().Type);
         }
+
+        [Test]
+        public void Membership_UpgradeMembership()
+        {
+            Product membership = new()
+            {
+                Category = ProductCategory.Digital,
+                Name = "Some membership name",
+                Type = ProductType.MembershipUpgrade
+            };
+
+            List<OrderProxy> orders = new()
+            {
+                new OrderProxy(new List<Product> { membership })
+            };
+
+            _processingService.AddForProcessing(orders);
+            _processingService.ProcessOrders();
+
+            var numberOfProcessedMemberships = _membershipService.StartProcessing();
+
+            Assert.AreEqual(1, numberOfProcessedMemberships);
+            Assert.AreEqual(1, _membershipService.ProcessedMemberships.Count);
+            Assert.AreEqual(MembershipType.New, _membershipService.ProcessedMemberships.Single().Type);
+        }
     }
 }
