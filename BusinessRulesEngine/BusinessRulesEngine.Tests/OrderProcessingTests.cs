@@ -141,8 +141,6 @@ namespace BusinessRulesEngine.Tests
 
             _emailService.StartProcessing();
 
-            Assert.AreEqual(1, _membershipService.ProcessedMemberships.Count);
-            Assert.AreEqual(MembershipType.Upgrade, _membershipService.ProcessedMemberships.Single().Type);
             Assert.AreEqual(1, _emailService.ProcessedOrderEmails.Count);
         }
     }

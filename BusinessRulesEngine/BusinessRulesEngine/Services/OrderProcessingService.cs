@@ -10,10 +10,12 @@ namespace BusinessRulesEngine.Services
     {
         Queue<OrderProxy> _orders = new Queue<OrderProxy>();
         IMembershipService _membershipService;
+        IEmailService _emailService;
 
-        public OrderProcessingService(IMembershipService membershipService)
+        public OrderProcessingService(IMembershipService membershipService, IEmailService emailService)
         {
             _membershipService = membershipService;
+            _emailService = emailService;
         }
 
         public void AddForProcessing(List<OrderProxy> orders)
@@ -38,8 +40,8 @@ namespace BusinessRulesEngine.Services
             {
                 new PhysicalProduct_PackingSlipRule(),
                 new Book_RoyaltyDepartmentPackingSlip(),
-                new Membership_ActivationRule(_membershipService),
-                new Membership_UpgradeRule(_membershipService)
+                new Membership_ActivationRule(_membershipService, _emailService),
+                new Membership_UpgradeRule(_membershipService, _emailService)
             };
 
             IOrderProcessingRulesEngine engine = new OrderProcessingRulesEngine(rules);
