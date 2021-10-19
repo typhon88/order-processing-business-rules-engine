@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using BusinessRulesEngine.Models;
+using System.Collections.Generic;
 
-namespace BusinessRulesEngine.Tests
+namespace BusinessRulesEngine.Interfaces
 {
     public interface IOrderProcessingService
     {

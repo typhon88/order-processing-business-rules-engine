@@ -1,4 +1,4 @@
-﻿namespace BusinessRulesEngine.Tests
+﻿namespace BusinessRulesEngine.Models
 {
     public class Product
     {

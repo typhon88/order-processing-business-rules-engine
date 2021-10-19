@@ -1,3 +1,5 @@
+using BusinessRulesEngine.Interfaces;
+using BusinessRulesEngine.Models;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
