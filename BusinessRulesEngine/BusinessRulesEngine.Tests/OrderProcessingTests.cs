@@ -25,7 +25,8 @@ namespace BusinessRulesEngine.Tests
             Product physicalProduct = new()
             {
                 Category = ProductCategory.Physical,
-                Name = "Some physical product"
+                Name = "Some physical product",
+                Type = ProductType.Generic
             };
 
             List<OrderProxy> orders = new()
@@ -38,6 +39,27 @@ namespace BusinessRulesEngine.Tests
 
             Assert.AreEqual(1, orders.Single().PackingSlips.Count);
             Assert.AreEqual(orders.Single().PackingSlips.Single().Name, "Shipping packing slip");
+        }
+
+        [Test]
+        public void Book_GeneratesShippingAndRoyaltyPackingSlip()
+        {
+            Product book = new()
+            {
+                Category = ProductCategory.Physical,
+                Name = "Some book name",
+                Type = ProductType.Book
+            };
+
+            List<OrderProxy> orders = new()
+            {
+                new OrderProxy(new List<Product> { book })
+            };
+
+            _processingService.AddForProcessing(orders);
+            _processingService.ProcessOrders();
+
+            Assert.AreEqual(2, orders.First().PackingSlips.Count);
         }
     }
 }
