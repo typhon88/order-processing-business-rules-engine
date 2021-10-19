@@ -27,6 +27,7 @@ namespace BusinessRulesEngine.Services
                 // TODO Add some processing logic
 
                 _processedMemberships.Add(membership);
+                _numberOfProcessedMemberships++;
             }
 
             return _memberships.Count > 0;
@@ -36,7 +37,6 @@ namespace BusinessRulesEngine.Services
         {
             while (ProcessNext())
             {
-                _numberOfProcessedMemberships++;
             }
 
             return _numberOfProcessedMemberships;

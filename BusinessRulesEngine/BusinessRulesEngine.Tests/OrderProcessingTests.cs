@@ -83,8 +83,9 @@ namespace BusinessRulesEngine.Tests
             _processingService.AddForProcessing(orders);
             _processingService.ProcessOrders();
 
-            _membershipService.StartProcessing();
+            var numberOfProcessedMemberships = _membershipService.StartProcessing();
 
+            Assert.AreEqual(1, numberOfProcessedMemberships);
             Assert.AreEqual(1, _membershipService.ProcessedMemberships.Count);
             Assert.AreEqual(MembershipType.New, _membershipService.ProcessedMemberships.Single().Type);
         }
